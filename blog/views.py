@@ -21,3 +21,7 @@ class BlogPostListView(generic.ListView):
     model = BlogPost
     ordering = ['-post_date']
     paginate_by = 5
+
+
+class BlogPostDetailView(generic.DetailView):
+    model = BlogPost
