@@ -30,3 +30,7 @@ class BlogPostDetailView(generic.DetailView):
 class BlogAuthorListView(generic.ListView):
     model = BlogAuthor
     paginate_by = 5
+
+
+class BlogAuthorDetailView(generic.DetailView):
+    model = BlogAuthor
