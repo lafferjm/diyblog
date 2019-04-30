@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views import generic
 from blog.models import BlogAuthor, BlogComment, BlogPost
 
 
@@ -14,3 +15,9 @@ def index(request):
     }
 
     return render(request, 'blog/index.html', context=context)
+
+
+class BlogPostListView(generic.ListView):
+    model = BlogPost
+    ordering = ['-post_date']
+    paginate_by = 5
