@@ -20,6 +20,9 @@ class BlogPost(models.Model):
     content = models.TextField(max_length=2000, help_text="Enter your blog text here.")
     post_date = models.DateField(default=date.today)
 
+    class Meta:
+        ordering = ['-post_date']
+
     def get_absolute_url(self):
         return reverse('blog-detail', args=[str(self.id)])
 

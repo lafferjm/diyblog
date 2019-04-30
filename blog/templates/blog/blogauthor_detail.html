@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Blogger: {{ blogauthor.user }}</h1>
+    <h3>Bio</h3>
+    <p>{{ blogauthor.bio }}</p>
+    <h3>Blogs List</h3>
+    {% if blogauthor.blogpost_set.all %}
+        <ul>
+            {% for blogpost in blogauthor.blogpost_set.all %}
+                <li>
+                    <a href="{{ blogpost.get_absolute_url }}">{{ blogpost.name }}</a> ({{ blogpost.post_date }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>This user doesn't have any blog posts!</p>
+    {% endif %}
+{% endblock %}
