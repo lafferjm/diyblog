@@ -35,7 +35,7 @@ class BlogComment(models.Model):
 
     def __str__(self):
         max_title_length = 75
-        if len(self.description) > max_title_length:
+        if len(self.comment) > max_title_length:
             title_string = self.comment[:max_title_length] + '...'
         else:
             title_string = self.comment
