@@ -36,6 +36,9 @@ class BlogComment(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ['-post_date']
+
     def __str__(self):
         max_title_length = 75
         if len(self.comment) > max_title_length:

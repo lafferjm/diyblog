@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.views import generic
 from django.views.generic.edit import CreateView
 from blog.models import BlogAuthor, BlogComment, BlogPost
@@ -39,4 +40,12 @@ class BlogAuthorDetailView(generic.DetailView):
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = BlogComment
-    fields = ['comment']
+    fields = ['comment',]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.blog = get_object_or_404(BlogPost, pk=self.kwargs['pk'])
+        return super(CommentCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('blog-detail', kwargs={'pk': self.kwargs['pk']})
