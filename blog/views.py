@@ -1,5 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
+from django.views.generic.edit import CreateView
 from blog.models import BlogAuthor, BlogComment, BlogPost
 
 
@@ -33,3 +35,8 @@ class BlogAuthorListView(generic.ListView):
 
 class BlogAuthorDetailView(generic.DetailView):
     model = BlogAuthor
+
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = BlogComment
+    fields = ['comment']
